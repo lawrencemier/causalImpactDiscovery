@@ -91,13 +91,13 @@ source('secrets.R')
 ga_auth()
 
 ## get your accounts
-#account_list <- ga_account_list()
+account_list <- ga_account_list()
 
 ## account_list will have a column called "viewId"
 #account_list$viewId
 
 ## View account_list and pick the viewId you want to extract data from. 
-#ga_id <- account_list$viewId[grep("http://www.lawsandbox.com", account_list$websiteUrl)]
+#ga_id <- account_list$viewId[grep("Curamando.com - Master", account_list$viewName)]
 
 ## simple query to test connection
 #google_analytics(ga_id,
@@ -287,7 +287,7 @@ valueBoxTimeOnTime <- function(data, time_period="month"){
     diff_period <- paste(round(diff_period, 2)*100, "%")
     
     icon_vb <- ifelse(wentUp, "arrow-up", "arrow-down")
-    color_vb <- ifelse(wentUp, "olive", "maroon")
+    color_vb <- ifelse(wentUp, "green", "red")
   } else { ## period was invalid, default to nothing
     diff_period <- "-"
     icon_vb <- "exclamation"

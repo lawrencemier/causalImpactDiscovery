@@ -24,8 +24,8 @@ shinyServer(function(input, output, session) {
     #                       fetch_dimensions = "ga:date,ga:medium",
     #                       fetch_filter="")
 
-    gadata <- get_ga_data(profileID = account_list$viewId[grep("http://www.lawsandbox.com", account_list$websiteUrl)],
-                          fetch_daterange = c("2019-03-01", "2019-05-15"),
+    gadata <- get_ga_data(profileID = account_list$viewId[grep("Curamando.com - Master", account_list$viewName)],
+                          fetch_daterange = c("2018-08-01", "2019-05-15"),
                           fetch_metrics = "sessions",
                           fetch_dimensions = c("date","medium"),
                           fetch_filter = "")
@@ -38,6 +38,8 @@ shinyServer(function(input, output, session) {
     data
     
   })
+  
+  
   
   anomalyData <- reactive({
     data <- ga_data()
@@ -269,7 +271,7 @@ shinyServer(function(input, output, session) {
   
   eventData <- reactive({
     eventUploaded <- input$eventUploadFile
-    
+    #browser()
     if(is.null(eventUploaded)){
       ## get it from the SQL database instead
       uploaded_csv <- try(loadData("onlineGAshiny_events"))
@@ -293,9 +295,9 @@ shinyServer(function(input, output, session) {
           uploaded_csv <- uploaded_csv[complete.cases(uploaded_csv),]
           
           ## convert dates
-          dates_guessed <- as.Date(uploaded_csv$date,
-                                   guess_formats(uploaded_csv$date, 
-                                                 c("Y-m-d", "m-d-Y")))
+          dates_guessed <- as.Date(uploaded_csv$date) #,
+                                   #guess_formats(uploaded_csv$date, 
+                                    #             c("Y-m-d", "m-d-Y")))
           message("Dates: ", dates_guessed)
           uploaded_csv$date <- dates_guessed
           
@@ -318,7 +320,7 @@ shinyServer(function(input, output, session) {
   })
   
   output$eventTable <- DT::renderDataTable({
-    
+   
     eventData()
     
   })

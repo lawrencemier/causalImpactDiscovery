@@ -7,7 +7,7 @@ options(mysql = list(
   "databaseName" = "onlinegashiny"),
   rga = list(
     
-    "profile_id" = "181450163",
+    "profile_id" = "61593498",
     "daysBackToFetch" = 356*3
   ),
   shinyMulti = list(
